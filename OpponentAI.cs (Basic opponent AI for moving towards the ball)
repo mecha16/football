@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class OpponentAI : MonoBehaviour
+{
+    public float moveSpeed = 3f;
+    public Transform ball;
+
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 direction = (ball.position - transform.position).normalized;
+        rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+    }
+}
