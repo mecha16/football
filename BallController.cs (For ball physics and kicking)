@@ -1,0 +1,22 @@
+using UnityEngine;
+
+public class BallController : MonoBehaviour
+{
+    public float kickForce = 10f;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Check if the ball collides with the player
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Vector2 direction = (transform.position - collision.transform.position).normalized;
+            rb.AddForce(direction * kickForce, ForceMode2D.Impulse);
+        }
+    }
+}
