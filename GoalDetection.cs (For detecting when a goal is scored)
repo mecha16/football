@@ -1,0 +1,22 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GoalDetection : MonoBehaviour
+{
+    public Text scoreText;
+    private int score = 0;
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ball"))
+        {
+            score++;
+            scoreText.text = "Score: " + score.ToString();
+
+            // Reset ball position after goal
+            other.transform.position = new Vector3(0, 0, 0);
+            Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+        }
+    }
+}
